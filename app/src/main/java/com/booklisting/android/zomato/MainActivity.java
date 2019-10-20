@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         private void getSearch() {
             Call<List<Search>> call = jsonPlaceHolderApi
-                    .getSearch("c2582c8abe4da7e745a6aab45b94335a", 19.0760, 72.8777 );
+                    .getSearch("Enter your Zomato api key inside double quotes", 19.0760, 72.8777 );
 
             call.enqueue(new Callback<List<Search>>() {
                 @Override
