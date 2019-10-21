@@ -138,4 +138,21 @@ public class LocationSuggestion {
         this.stateCode = stateCode;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", countryId=" + countryId +
+                ", countryName='" + countryName + '\'' +
+                ", countryFlagUrl='" + countryFlagUrl + '\'' +
+                ", shouldExperimentWith=" + shouldExperimentWith +
+                ", discoveryEnabled=" + discoveryEnabled +
+                ", hasNewAdFormat=" + hasNewAdFormat +
+                ", isState=" + isState +
+                ", stateId=" + stateId +
+                ", stateName='" + stateName + '\'' +
+                ", stateCode='" + stateCode + '\'' +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package com.booklisting.android.zomato;
 
-import com.booklisting.android.zomato.LocationSuggestion;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -9,7 +10,7 @@ public class Post {
 
     @SerializedName("location_suggestions")
     @Expose
-    private List<LocationSuggestion> locationSuggestions = null;
+    private ArrayList<LocationSuggestion> locationSuggestions = null;
     @SerializedName("status")
     @Expose
     private String status;
@@ -20,11 +21,11 @@ public class Post {
     @Expose
     private Integer hasTotal;
 
-    public List<LocationSuggestion> getLocationSuggestions() {
+    public ArrayList<LocationSuggestion> getLocationSuggestions() {
         return locationSuggestions;
     }
 
-    public void setLocationSuggestions(List<LocationSuggestion> locationSuggestions) {
+    public void setLocationSuggestions(ArrayList<LocationSuggestion> locationSuggestions) {
         this.locationSuggestions = locationSuggestions;
     }
 

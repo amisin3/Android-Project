@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,9 +62,10 @@ public class MainActivity extends AppCompatActivity {
 
 
                     String content = "";
+                    ArrayList<LocationSuggestion> lc = searches.getLocationSuggestions();
+                    Log.e(TAG, String.valueOf(lc.get(0).getId()));
 
 
-                    
                     content += "location_suggestions: " + searches.getLocationSuggestions() + "\n";
                     content += "getStatus: " + searches.getStatus() + "\n";
                     content += "getHas_more: " + searches.getHasMore() + "\n";
