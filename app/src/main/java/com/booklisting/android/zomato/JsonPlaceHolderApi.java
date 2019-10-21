@@ -6,6 +6,7 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -13,31 +14,9 @@ import retrofit2.http.Url;
 
 public interface JsonPlaceHolderApi {
 
-//    @GET("posts")
-//    Call<List<Post>> getPosts(
-//            @Query("userId") Integer[] userId,
-//            @Query("_sort") String sort,
-//            @Query("_order") String order
-//    );
-//
-//    @GET("posts")
-//    Call<List<Post>> getPosts(@QueryMap Map<String, String> parameters);
-
-//    @GET("posts/{id}/comments")
-//    Call<List<Comment>> getComments(@Path("id") int postId);
-
-    @GET("cities")
-    Call<List<Search>> getSearch(@Query("user-key") String user_key,
-                                    @Query("lat") Double lat,
-                                    @Query("lon") Double lon);
-
-
-//    @GET
-//    Call<List<Comment>> getComments(@Url String url);
-
-    @GET("maps/api/place/nearbysearch/json")
-    Call<List<Post>> getNearbyPlaces(@Query("location") String location,
-                                         @Query("radius") Integer radius,
-                                         @Query("key") String key);
+    @Headers("user-key:c2582c8abe4da7e745a6aab45b94335a")
+    @GET("api/v2.1/cities")
+    Call<Post> getSearch(@Query("lat") Double lat,
+                                 @Query("lon") Double lon);
 
 }

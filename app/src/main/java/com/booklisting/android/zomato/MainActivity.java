@@ -31,82 +31,53 @@ public class MainActivity extends AppCompatActivity {
             textViewResult = findViewById(R.id.text_view_result);
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://maps.googleapis.com/")
+                    .baseUrl("https://developers.zomato.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
             jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-            //getPosts();
-            //getSearch();
-        getNearbyPlaces();
+
+            getSearch();
+
     }
 
         private void getSearch() {
-            Call<List<Search>> call = jsonPlaceHolderApi
-                    .getSearch("Enter your Zomato api key inside double quotes", 19.0760, 72.8777 );
+            Call<Post> call = jsonPlaceHolderApi
+                    .getSearch(19.0760, 72.8777 );
 
-            call.enqueue(new Callback<List<Search>>() {
+            call.enqueue(new Callback<Post>() {
                 @Override
-                public void onResponse(Call<List<Search>> call, Response<List<Search>> response) {
+                public void onResponse(Call<Post> call, Response<Post> response) {
 
                     if (!response.isSuccessful()) {
                         textViewResult.setText("Code: " + response.code());
                         return;
                     }
 
-                    List<Search> searches = response.body();
+                    Post searches = response.body();
 
-                    for (Search  search: searches) {
-                        String content = "";
-                        content += "location_suggestions: " + search.getLocation_suggestions() + "\n";
-                        content += "getStatus: " + search.getStatus() + "\n";
-                        content += "getHas_more: " + search.getHas_more() + "\n";
-                        content += "getHas_total: " + search.getHas_total() + "\n";
 
-                        textViewResult.append(content);
-                    }
+                    String content = "";
+
+
+                    
+                    content += "location_suggestions: " + searches.getLocationSuggestions() + "\n";
+                    content += "getStatus: " + searches.getStatus() + "\n";
+                    content += "getHas_more: " + searches.getHasMore() + "\n";
+                    content += "getHas_total: " + searches.getHasTotal() + "\n";
+                    textViewResult.append(content);
+
+
+
                 }
 
                 @Override
-                public void onFailure(Call<List<Search>> call, Throwable t) {
+                public void onFailure(Call<Post> call, Throwable t) {
                     Log.e(TAG, "I am here");
                     textViewResult.setText(t.getMessage());
                 }
             });
         }
 
-    private void getNearbyPlaces() {
-        Call<List<Post>> call = jsonPlaceHolderApi
-                .getNearbyPlaces("-33.8670522,151.1957362", 1500, "AIzaSyBTY2-4PnHFYYlWyyMjsYp0nU4at_BKeFs" );
-
-        call.enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-
-                if (!response.isSuccessful()) {
-                    textViewResult.setText("Code: " + response.code());
-                    return;
-                }
-
-                List<Post> searches = response.body();
-
-                for (Post  search: searches) {
-                    String content = "";
-                    content += "htmlAttributions: " + search.getHtmlAttributions() + "\n";
-                    content += "results: " + search.getResults() + "\n";
-                    content += "status: " + search.getStatus() + "\n";
-
-
-                    textViewResult.append(content);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-                Log.e(TAG, "I am here");
-                textViewResult.setText(t.getMessage());
-            }
-        });
-    }
 }
